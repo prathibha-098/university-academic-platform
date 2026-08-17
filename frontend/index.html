@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Academic Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>University Academic Management</h1>
+    <p>Student Success Platform</p>
+  </div>
+  <span id="status">Checking backend...</span>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('dashboard', this)">Dashboard</button>
+  <button onclick="showSection('students', this)">Students</button>
+  <button onclick="showSection('risk', this)">At-Risk Students</button>
+  <button onclick="showSection('add', this)">Add Student</button>
+</nav>
+
+<main>
+  <section id="dashboard" class="section">
+    <h2>Academic Dashboard</h2>
+    <div class="cards">
+      <div class="card"><span>Total Students</span><strong id="total">0</strong></div>
+      <div class="card"><span>At-Risk Students</span><strong id="riskCount">0</strong></div>
+      <div class="card"><span>Average Attendance</span><strong id="avgAttendance">0%</strong></div>
+      <div class="card"><span>Average Marks</span><strong id="avgMarks">0</strong></div>
+    </div>
+    <div class="panel">
+      <h3>Platform Features</h3>
+      <ul>
+        <li>Student academic records</li>
+        <li>Attendance and performance monitoring</li>
+        <li>At-risk student identification</li>
+        <li>Academic dashboard and reporting</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="students" class="section hidden">
+    <h2>Student Records</h2>
+    <div class="panel">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Department</th><th>Email</th><th>Attendance</th><th>Marks</th><th>Action</th></tr>
+        </thead>
+        <tbody id="studentTable"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="risk" class="section hidden">
+    <h2>Academically At-Risk Students</h2>
+    <p class="hint">A student is flagged when attendance is below 75% or marks are below 60.</p>
+    <div id="riskList"></div>
+  </section>
+
+  <section id="add" class="section hidden">
+    <h2>Add Student</h2>
+    <form id="studentForm" class="panel form">
+      <input id="name" placeholder="Student name" required>
+      <input id="department" placeholder="Department" required>
+      <input id="email" type="email" placeholder="University email" required>
+      <input id="attendance" type="number" min="0" max="100" placeholder="Attendance %" required>
+      <input id="marks" type="number" min="0" max="100" placeholder="Marks" required>
+      <button type="submit">Add Student</button>
+      <p id="formMessage"></p>
+    </form>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

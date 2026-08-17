@@ -1,0 +1,17 @@
+SYSTEM ARCHITECTURE
+
+User Browser
+    |
+    v
+Frontend Container (Nginx :8080)
+    |
+    | REST API calls
+    v
+Backend Container (Flask :5000)
+    |
+    | SQL
+    v
+PostgreSQL Container (:5432)
+    |
+    v
+Persistent Docker Volume

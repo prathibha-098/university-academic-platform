@@ -1,0 +1,16 @@
+APPLICATION WORKFLOW
+
+Login/Access
+    |
+Dashboard
+    |
++-----------------------------+
+| Student Management          |
+| Attendance & Marks          |
+| At-Risk Detection           |
+| Academic Reporting          |
++-----------------------------+
+    |
+Backend API
+    |
+PostgreSQL Database

@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: university_db
+    environment:
+      POSTGRES_DB: universitydb
+      POSTGRES_USER: university
+      POSTGRES_PASSWORD: password
+    volumes:
+      - university_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U university -d universitydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: university_backend
+    environment:
+      DB_HOST: db
+      DB_NAME: universitydb
+      DB_USER: university
+      DB_PASSWORD: password
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: university_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  university_data:
