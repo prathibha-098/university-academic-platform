@@ -52,3 +52,7 @@ main
     ├── feature-dashboard
     └── feature-risk-detection
 ```
+## Student Management
+
+The platform manages student academic records, course registration,
+attendance, assessments, examination results, and academic progress.
