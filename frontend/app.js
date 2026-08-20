@@ -30,14 +30,53 @@ async function loadDashboard() {
 }
 
 async function loadStudents() {
-  const r = await fetch(`${API}/students`);
-  const students = await r.json();
-  document.getElementById("studentTable").innerHTML = students.map(s => `
-    <tr>
-      <td>${s.id}</td><td>${s.name}</td><td>${s.department}</td>
-      <td>${s.email}</td><td>${s.attendance}%</td><td>${s.marks}</td>
-      <td><button class="delete" onclick="deleteStudent(${s.id})">Delete</button></td>
-    </tr>`).join("");
+  try {
+    const r = await fetch(`${API}/students`);
+
+    if (!r.ok) {
+      throw new Error("Unable to load student records");
+    }
+
+    const students = await r.json();
+    const table = document.getElementById("studentTable");
+
+    if (!students.length) {
+      table.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align:center;">
+            No student records found.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    table.innerHTML = students.map(s => `
+      <tr>
+        <td>${s.id}</td>
+        <td>${s.name}</td>
+        <td>${s.department}</td>
+        <td>${s.email}</td>
+        <td>${s.attendance}%</td>
+        <td>${s.marks}</td>
+        <td>
+          <button class="delete" onclick="deleteStudent(${s.id})">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join("");
+
+  } catch (error) {
+    document.getElementById("studentTable").innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align:center;">
+          Unable to load student records.
+        </td>
+      </tr>
+    `;
+    console.error(error);
+  }
 }
 
 async function loadRisk() {
